@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-lg">
-    <div class="row">
+    <div class="row q-mb-sm">
       <div class="col-lg-2 q-pa-sm">
         <div class="text-subtitle2">Country</div>
         <q-select
@@ -11,6 +11,14 @@
         />
       </div>
       <div class="col-lg-2 q-pa-sm">
+        <div class="text-subtitle2">Product Name</div>
+        <q-input filled label="Product Name" v-model="productNameSearch" />
+      </div>
+      <div class="col-lg-2 q-pa-sm">
+        <div class="text-subtitle2">Department</div>
+        <q-input filled label="Product Department" v-model="departmentSearch" />
+      </div>
+      <div class="col-lg-2 q-pa-sm">
         <div class="text-subtitle2">Category</div>
         <q-input filled label="Product Category" v-model="categorySearch" />
       </div>
@@ -19,18 +27,24 @@
         <q-input filled label="Product SKU Name" v-model="skuNameSearch" />
       </div>
       <div class="col-lg-2 q-pa-sm">
-        <div class="text-subtitle2">Product Name</div>
-        <q-input filled label="Product Name" v-model="productNameSearch" />
-      </div>
-      <div class="col-lg-2 q-pa-sm">
-        <div class="text-subtitle2">SKU</div>
+        <div class="text-subtitle2">Reference</div>
         <q-input
           type="number"
           filled
-          label="International SKU"
+          label="Product Reference"
           v-model="skuSearch"
         />
       </div>
+    </div>
+    <div class="row q-mb-sm q-px-sm">
+      <q-btn
+        color="accent"
+        outline
+        size="sm"
+        :disable="tableExportCSV.length == 0"
+      >
+        <download-excel :data="tableExportCSV">Export Table</download-excel>
+      </q-btn>
     </div>
     <div class="row">
       <div class="col-lg-8 q-pa-sm">
@@ -51,9 +65,11 @@
           </template>
           <template v-slot:body="props">
             <q-tr :props="props">
-              <q-td key="productName" :props="props">
-                {{ props.row['_ProductName (Required)'] }}
-              </q-td>
+              <q-td
+                key="productName"
+                :props="props"
+                v-html="props.row['_ProductName (Required)']"
+              />
               <q-td key="department" :props="props">
                 {{ props.row['_DepartamentName'] }}
               </q-td>
@@ -63,11 +79,11 @@
               <q-td key="skuName" :props="props">
                 {{ props.row['_SkuName'] }}
               </q-td>
-              <q-td key="vtexSku" :props="props">
-                {{ props.row['_SkuId (Not changeable)'] }}
-              </q-td>
               <q-td key="skuReference" :props="props">
                 {{ props.row['_SKUReferenceCode'] }}
+              </q-td>
+              <q-td key="vtexSku" :props="props">
+                {{ props.row['_SkuId (Not changeable)'] }}
               </q-td>
               <q-td key="urlLink" :props="props">
                 <a
@@ -87,14 +103,14 @@
       <div class="col-lg-4 q-pa-sm">
         <q-card class="q-mb-md">
           <q-card-section>
-            <div class="text-h6">Insert SKUs</div>
+            <div class="text-h6">Insert References</div>
           </q-card-section>
           <q-card-section>
             <q-input
               type="textarea"
               rows="10"
               filled
-              label="SKUs"
+              label="References"
               v-model="skuList"
             />
           </q-card-section>
@@ -114,10 +130,16 @@
           </q-card-section>
           <q-card-section v-if="skuCSV.length > 0">
             <div class="text-body">
+              <!-- <div class="text-body2 q-mb-sm">
+                References added: {{ this.skuList.split('\n').length }}
+              </div> -->
               <div class="text-body2 q-mb-sm">
-                References found: {{ skuCSV.length }}
+                References found: {{ skuCSV.length }} /
+                {{ insertedReferences }}
               </div>
-              <q-btn color="accent" label="Export CSV" outline size="sm" />
+              <download-excel :data="skuCSV">
+                <q-btn color="accent" label="Export CSV" outline size="sm" />
+              </download-excel>
             </div>
           </q-card-section>
           <q-card-section v-else>
@@ -136,12 +158,15 @@ export default {
   data() {
     return {
       selectedCountry: '',
-      skuSearch: '',
       productNameSearch: '',
+      departmentSearch: '',
       categorySearch: '',
       skuNameSearch: '',
+      skuSearch: '',
+      insertedReferences: '',
       skuList: '',
       skuCSV: [],
+      tableExportCSV: [],
       data: [],
       columns: [
         {
@@ -173,17 +198,17 @@ export default {
           sortable: true,
         },
         {
+          name: 'skuReference',
+          label: 'Reference',
+          align: 'left',
+          field: '_SKUReferenceCode',
+          sortable: true,
+        },
+        {
           name: 'vtexSku',
           label: 'Vtex SKU',
           align: 'left',
           field: '_SkuId (Not changeable)',
-          sortable: true,
-        },
-        {
-          name: 'skuReference',
-          label: 'SKU Reference',
-          align: 'left',
-          field: '_SKUReferenceCode',
           sortable: true,
         },
         {
@@ -204,10 +229,11 @@ export default {
     generateSkuCollection() {
       this.skuCSV = []
       let skus = this.skuList.split('\n')
+      this.insertedReferences = skus.length
       for (let item of skus) {
         for (let sku of this.data) {
           if (item == sku['_SKUReferenceCode']) {
-            this.skuCSV.push(sku['_SkuId (Not changeable)'])
+            this.skuCSV.push({SKU: sku['_SkuId (Not changeable)']})
             break
           }
         }
@@ -246,9 +272,16 @@ export default {
             .includes(this.categorySearch.toLowerCase()) &&
           item['_SkuName']
             .toLowerCase()
-            .includes(this.skuNameSearch.toLowerCase())
+            .includes(this.skuNameSearch.toLowerCase()) &&
+          item['_DepartamentName']
+            .toLowerCase()
+            .includes(this.departmentSearch.toLowerCase())
         )
           filteredProducts.push(item)
+      })
+      this.tableExportCSV = []
+      filteredProducts.forEach(product => {
+        this.tableExportCSV.push({SKU: product['_SkuId (Not changeable)']})
       })
       return filteredProducts
     },

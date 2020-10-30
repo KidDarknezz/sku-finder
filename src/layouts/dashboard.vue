@@ -59,7 +59,7 @@ export default {
           link: '/',
         },
         {
-          icon: 'home',
+          icon: 'view_list',
           text: 'Collection Builder',
           link: '/collection-builder',
         },
