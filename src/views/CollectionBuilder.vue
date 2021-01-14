@@ -6,7 +6,7 @@
         <q-select
           filled
           label="Select"
-          :options="['Panama', 'Guatemala']"
+          :options="['Panama', 'Guatemala', 'Colombia', 'Peru']"
           v-model="selectedCountry"
         />
       </div>
@@ -255,6 +255,12 @@ export default {
       }
       if (this.selectedCountry == 'Guatemala') {
         return `https://www.bathandbodyworks.gt/${link}/p`
+      }
+      if (this.selectedCountry == 'Colombia') {
+        return `https://www.bathandbodyworks.co/${link}/p`
+      }
+      if (this.selectedCountry == 'Peru') {
+        return `https://www.bathandbodyworks.pe/${link}/p`
       }
     },
   },
