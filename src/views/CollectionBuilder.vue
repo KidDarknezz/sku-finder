@@ -6,7 +6,15 @@
         <q-select
           filled
           label="Select"
-          :options="['Panama', 'Guatemala', 'Colombia', 'Peru']"
+          :options="[
+            {label: 'Panama', value: 'panama'},
+            {label: 'Guatemala', value: 'guatemala'},
+            {label: 'Colombia', value: 'colombia'},
+            {label: 'Peru', value: 'peru'},
+            {label: 'Costa Rica', value: 'costarica'},
+          ]"
+          map-options
+          emit-value
           v-model="selectedCountry"
         />
       </div>
@@ -143,9 +151,7 @@
             </div>
           </q-card-section>
           <q-card-section v-else>
-            <div class="text-caption">
-              Insert references in space above.
-            </div>
+            <div class="text-caption">Insert references in space above.</div>
           </q-card-section>
         </q-card>
       </div>
@@ -250,17 +256,20 @@ export default {
       })
     },
     getStoreLink(link) {
-      if (this.selectedCountry == 'Panama') {
+      if (this.selectedCountry == 'panama') {
         return `https://www.bathandbodyworks.pa/${link}/p`
       }
-      if (this.selectedCountry == 'Guatemala') {
+      if (this.selectedCountry == 'guatemala') {
         return `https://www.bathandbodyworks.gt/${link}/p`
       }
-      if (this.selectedCountry == 'Colombia') {
+      if (this.selectedCountry == 'colombia') {
         return `https://www.bathandbodyworks.co/${link}/p`
       }
-      if (this.selectedCountry == 'Peru') {
+      if (this.selectedCountry == 'peru') {
         return `https://www.bathandbodyworks.pe/${link}/p`
+      }
+      if (this.selectedCountry == 'costarica') {
+        return `https://www.bathandbodyworks.cr/${link}/p`
       }
     },
   },
@@ -293,7 +302,7 @@ export default {
     },
   },
   watch: {
-    selectedCountry: function() {
+    selectedCountry: function () {
       this.loadData()
     },
   },
