@@ -63,6 +63,11 @@ export default {
           text: 'Collection Builder',
           link: '/collection-builder',
         },
+        {
+          icon: 'local_offer',
+          text: 'Promotion Checker',
+          link: '/promo-checker',
+        },
       ],
     }
   },
