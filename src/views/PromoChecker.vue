@@ -58,6 +58,15 @@
           <q-card-section>
             {{ item.sku }}
           </q-card-section>
+          <q-card-actions>
+            <q-btn
+              icon="check"
+              round
+              color="green-7"
+              @click="removeItemFromArray(i)"
+              flat
+            />
+          </q-card-actions>
         </q-card>
       </div>
     </div>
@@ -135,6 +144,9 @@ export default {
           })
         }
       })
+    },
+    removeItemFromArray(i) {
+      this.noPromoItems.splice(i, 1)
     },
   },
 }
