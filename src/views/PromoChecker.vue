@@ -93,6 +93,22 @@ export default {
           hs:
             'https://www.bathandbodyworks.pa/buscapagina?fq=C%3a%2f16%2f&O=OrderByReleaseDateDESC&PS=12&sl=f9ecb8dc-ce02-48fc-ae85-de11e131655f&cc=12&sm=0&PageNumber=',
         },
+        gt: {
+          bc:
+            'https://www.bathandbodyworks.gt/buscapagina?fq=C%3a%2f1%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=c909318e-bbfe-4ee4-818a-493c502e81be&cc=12&sm=0&PageNumber=',
+          hf:
+            'https://www.bathandbodyworks.gt/buscapagina?fq=C%3a%2f24%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=c909318e-bbfe-4ee4-818a-493c502e81be&cc=12&sm=0&PageNumber=',
+          hs:
+            'https://www.bathandbodyworks.gt/buscapagina?fq=C%3a%2f16%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=c909318e-bbfe-4ee4-818a-493c502e81be&cc=12&sm=0&PageNumber=',
+        },
+        co: {
+          bc:
+            'https://www.bathandbodyworks.co/buscapagina?fq=C%3a%2f1%2f&fq=H%3a145&O=OrderByReleaseDateDESC&PS=12&sl=5dd932b0-f527-43f5-81b1-8797615a4cb7&cc=12&sm=0&PageNumber=',
+          hf:
+            'https://www.bathandbodyworks.co/buscapagina?fq=C%3a%2f24%2f&fq=H%3a145&O=OrderByReleaseDateDESC&PS=12&sl=5dd932b0-f527-43f5-81b1-8797615a4cb7&cc=12&sm=0&PageNumber=',
+          hs:
+            'https://www.bathandbodyworks.co/buscapagina?fq=C%3a%2f16%2f&fq=H%3a145&O=OrderByReleaseDateDESC&PS=12&sl=5dd932b0-f527-43f5-81b1-8797615a4cb7&cc=12&sm=0&PageNumber=',
+        },
       },
       noPromoItems: [],
       emptyPage: false,
