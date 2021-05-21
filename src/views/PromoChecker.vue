@@ -70,6 +70,18 @@
         </q-card>
       </div>
     </div>
+    <q-dialog v-model="scrapeDialog" persistent>
+      <q-card>
+        <q-card-section>
+          <div class="row q-mb-md">
+            <q-space />
+            <q-spinner-grid color="primary" size="2em" class="text-center" />
+            <q-space />
+          </div>
+          <div class="text-h5 text-bold">SCRAPING!</div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -79,6 +91,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
+      scrapeDialog: false,
       selectedCountry: '',
       selectedCategory: '',
       options: {
@@ -109,6 +122,22 @@ export default {
           hs:
             'https://www.bathandbodyworks.co/buscapagina?fq=C%3a%2f16%2f&fq=H%3a145&O=OrderByReleaseDateDESC&PS=12&sl=5dd932b0-f527-43f5-81b1-8797615a4cb7&cc=12&sm=0&PageNumber=',
         },
+        pe: {
+          bc:
+            'https://www.bathandbodyworks.pe/buscapagina?fq=C%3a%2f1%2f&O=OrderByReleaseDateDESC&PS=12&sl=ec99cbba-da25-424f-91dd-f1c365e2acd6&cc=12&sm=0&PageNumber=',
+          hf:
+            'https://www.bathandbodyworks.pe/buscapagina?fq=C%3a%2f24%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=ec99cbba-da25-424f-91dd-f1c365e2acd6&cc=12&sm=0&PageNumber=',
+          hs:
+            'https://www.bathandbodyworks.pe/buscapagina?fq=C%3a%2f16%2f&O=OrderByReleaseDateDESC&PS=12&sl=ec99cbba-da25-424f-91dd-f1c365e2acd6&cc=12&sm=0&PageNumber=',
+        },
+        cr: {
+          bc:
+            'https://www.bathandbodyworks.cr/buscapagina?fq=C%3a%2f1%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=67e66edd-61d7-4a33-a20d-3233a603a514&cc=12&sm=0&PageNumber=',
+          hf:
+            'https://www.bathandbodyworks.cr/buscapagina?fq=C%3a%2f24%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=67e66edd-61d7-4a33-a20d-3233a603a514&cc=12&sm=0&PageNumber=',
+          hs:
+            'https://www.bathandbodyworks.cr/buscapagina?fq=C%3a%2f16%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=67e66edd-61d7-4a33-a20d-3233a603a514&cc=12&sm=0&PageNumber=',
+        },
       },
       noPromoItems: [],
       emptyPage: false,
@@ -116,6 +145,7 @@ export default {
   },
   methods: {
     async startScrape() {
+      this.scrapeDialog = true
       if (!this.selectedCategory || !this.selectedCountry) {
         alert('Please select a country and a category')
         return
@@ -131,6 +161,7 @@ export default {
       }
     },
     async scrape(url, page) {
+      console.log(url + page)
       this.options.url = url + page
       let response = await axios.post(
         'https://api.scraperbox.com/scrape',
@@ -139,7 +170,7 @@ export default {
       if (response.data.length > 0) {
         this.extractItems(response.data)
       } else {
-        console.log('empty page')
+        this.scrapeDialog = false
         this.emptyPage = true
       }
     },
