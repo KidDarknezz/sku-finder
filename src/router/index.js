@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Dashboard from '@/layouts/dashboard.vue'
+import Dashboard from '@/layouts/dashboard'
 
-import DashboardHome from '@/views/Home.vue'
-import CollectionBuilder from '@/views/CollectionBuilder.vue'
+import DashboardHome from '@/views/Home'
+import CollectionBuilder from '@/views/CollectionBuilder'
+import PromoChecker from '@/views/PromoChecker'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
         path: '/collection-builder',
         name: 'collection-builder',
         component: CollectionBuilder,
+      },
+      {
+        path: '/promo-checker',
+        name: 'promo-checker',
+        component: PromoChecker,
       },
     ],
   },
