@@ -152,6 +152,7 @@ export default {
       }
       this.noPromoItems = []
       let i = 1
+      this.emptyPage = false
       while (this.emptyPage != true) {
         await this.scrape(
           this.urls[this.selectedCountry][this.selectedCategory],
