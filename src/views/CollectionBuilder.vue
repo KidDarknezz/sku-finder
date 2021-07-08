@@ -6,7 +6,7 @@
         <q-select
           filled
           label="Select"
-          :options="['Panama', 'Guatemala', 'Colombia', 'Peru']"
+          :options="['Panama', 'Guatemala', 'Colombia', 'Peru', 'Paraguay']"
           v-model="selectedCountry"
         />
       </div>
