@@ -6,7 +6,7 @@
         <q-select
           filled
           label="Select"
-          :options="['Panama', 'Guatemala', 'Colombia', 'Peru', 'Paraguay']"
+          :options="['Panama', 'Guatemala', 'Colombia', 'Peru', 'CostaRica', 'Paraguay']"
           map-options
           emit-value
           v-model="selectedCountry"
