@@ -11,6 +11,7 @@
             {label: 'Colombia', value: 'co'},
             {label: 'Peru', value: 'pe'},
             {label: 'Costa Rica', value: 'cr'},
+            {label: 'Paraguay', value: 'py'},
           ]"
           filled
           map-options
@@ -137,6 +138,14 @@ export default {
             'https://www.bathandbodyworks.cr/buscapagina?fq=C%3a%2f24%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=67e66edd-61d7-4a33-a20d-3233a603a514&cc=12&sm=0&PageNumber=',
           hs:
             'https://www.bathandbodyworks.cr/buscapagina?fq=C%3a%2f16%2f&fq=H%3a137&O=OrderByReleaseDateDESC&PS=12&sl=67e66edd-61d7-4a33-a20d-3233a603a514&cc=12&sm=0&PageNumber=',
+        },
+        py: {
+          bc:
+            'https://www.bathandbodyworks.com.py/buscapagina?fq=C%3a%2f1%2f&fq=H%3a157&O=OrderByReleaseDateDESC&PS=12&sl=dea3dd01-5ee8-4232-86a2-0f7c353cdaff&cc=12&sm=0&PageNumber=',
+          hf:
+            'https://www.bathandbodyworks.com.py/buscapagina?fq=C%3a%2f24%2f&O=OrderByReleaseDateDESC&PS=12&sl=dea3dd01-5ee8-4232-86a2-0f7c353cdaff&cc=12&sm=0&PageNumber=',
+          hs:
+            'https://www.bathandbodyworks.com.py/buscapagina?fq=C%3a%2f16%2f&O=OrderByReleaseDateDESC&PS=12&sl=dea3dd01-5ee8-4232-86a2-0f7c353cdaff&cc=12&sm=0&PageNumber=',
         },
       },
       noPromoItems: [],
