@@ -6,7 +6,15 @@
         <q-select
           filled
           label="Select"
-          :options="['Panama', 'Guatemala', 'Colombia', 'Peru', 'CostaRica', 'Paraguay']"
+          :options="[
+            'Panama',
+            'Guatemala',
+            'Colombia',
+            'Peru',
+            'CostaRica',
+            'Paraguay',
+            'Ecuador',
+          ]"
           map-options
           emit-value
           v-model="selectedCountry"
@@ -264,6 +272,9 @@ export default {
       }
       if (this.selectedCountry == 'costarica') {
         return `https://www.bathandbodyworks.cr/${link}/p`
+      }
+      if (this.selectedCountry == 'ecuador') {
+        return `https://www.bathandbodyworks.ec/${link}/p`
       }
     },
   },

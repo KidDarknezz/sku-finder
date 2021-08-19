@@ -157,6 +157,7 @@ export default {
       this.scrapeDialog = true
       if (!this.selectedCategory || !this.selectedCountry) {
         alert('Please select a country and a category')
+        this.scrapeDialog = false
         return
       }
       this.noPromoItems = []
