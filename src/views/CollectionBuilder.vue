@@ -273,6 +273,9 @@ export default {
       if (this.selectedCountry == 'costarica') {
         return `https://www.bathandbodyworks.cr/${link}/p`
       }
+      if (this.selectedCountry == 'paraguay') {
+        return `https://www.bathandbodyworks.com.py/${link}/p`
+      }
       if (this.selectedCountry == 'ecuador') {
         return `https://www.bathandbodyworks.ec/${link}/p`
       }
